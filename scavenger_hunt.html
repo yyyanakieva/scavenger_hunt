@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Password Challenge</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f0f0f0;
+        }
+        #container {
+            text-align: center;
+            padding: 20px;
+            background-color: white;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #message {
+            margin-top: 20px;
+            font-size: 18px;
+            color: green;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Password Challenge</h1>
+        <p>Enter the correct passwords in sequence to see a special message!</p>
+        <input type="password" id="password" placeholder="Enter password" autofocus>
+        <button onclick="checkPassword()">Submit</button>
+        <p id="hint"></p>
+        <p id="message"></p>
+    </div>
+
+    <script>
+        const correctPasswords = ["smile123", "happy456", "joy789"];
+        let currentStep = 0;
+
+        function checkPassword() {
+            const inputPassword = document.getElementById('password').value;
+            if (inputPassword === correctPasswords[currentStep]) {
+                currentStep++;
+                document.getElementById('hint').textContent = '';
+                document.getElementById('password').value = '';
+                if (currentStep === correctPasswords.length) {
+                    document.getElementById('message').textContent = "Congratulations! You're awesome and deserve all the happiness! 😊";
+                    document.getElementById('password').style.display = 'none';
+                    document.querySelector('button').style.display = 'none';
+                } else {
+                    document.getElementById('hint').textContent = 'Correct! Enter the next password.';
+                }
+            } else {
+                document.getElementById('hint').textContent = 'Incorrect password, please try again.';
+            }
+        }
+    </script>
+</body>
+</html>
